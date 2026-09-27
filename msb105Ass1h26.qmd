@@ -5,8 +5,8 @@ date: last-modified
 date-format: "dddd D MMM, YYYY"
 csl: apa7.csl
 # nynorsk
-#lang: no-NN
-lang: no-NB
+#lang: nn
+lang: nb
 # for typst with bibtex
 citeproc: true
 papersize: a4
@@ -16,47 +16,49 @@ format:
 # krever at tinytex er installert
 #  pdf:
 #    papersize: a4
-bibliography: reproducibility.bib
-abstract: "Denne artikkelen diskuterer om reproduserbarhet alene er tilstrekkelig for pålitelig forskning, med særlig blikk på data science. Gjennom en litteraturgjennomgang skilles det mellom reproduserbarhet, replikerbarhet, validitet og generaliserbarhet, og det argumenters for at reproduserbarhet er en nødvendighet men ikke tilstrekkelig forutsetning. Replikasjonskrisen og publisseringsskjevhet trekkes frem som eksempler på hvorfor reproduserbare resultater likevel kan være lite robuste. Videre diskuteres hvordan verktøy som Quarto kan styrke transparens ved å samle tekst, kode og resultater i ett dokument, samtidig som utfordringer knyttet til beregningsmiljø og foskningskultur gjenstår. Artikkelen konkluderer med at pålitelig forskning krever mer enn reproduserbarhet alene."
+bibliography: [reproducibility.bib, ag.bib]
+abstract: |
+
+  Denne artikkelen diskuterer om reproduserbarhet alene er tilstrekkelig for pålitelig forskning, med særlig blikk på data science. Gjennom en litteraturgjennomgang skilles det mellom reproduserbarhet, replikerbarhet, validitet og generaliserbarhet, og det argumenters for at reproduserbarhet er en nødvendighet men ikke tilstrekkelig forutsetning. Replikasjonskrisen og publisseringsskjevhet trekkes frem som eksempler på hvorfor reproduserbare resultater likevel kan være lite robuste. Videre diskuteres hvordan verktøy som Quarto, [@Allaire_Quarto_2026], kan styrke transparens ved å samle tekst, kode og resultater i ett dokument, samtidig som utfordringer knyttet til beregningsmiljø og foskningskultur gjenstår. Artikkelen konkluderer med at pålitelig forskning krever mer enn reproduserbarhet alene.
 ---
 
 ## Introduksjon
 
-Reproduserbarhet er et viktig prinsipp innenfor vitenskaplig forskning, ettersom det gjør det mulig for andre forskere å bruke de samme dataene og analysemetodene for å undersøke om de oppnår det samme resultatet[@goodman2016b]. At forskningsresultatet kan reproduseres, betyr imidlertid ikke at resultatet nødvendigvis vil kunne bli gjenskapt med nye data eller andre forhold. Dette reiser spørsmål om hvorvidt reproduserbarhet alene er tilstrekkelig for å sikre pålitelige forskningsresultater. Andre faktorer som replikerbarhet, generaliserbarhet og validitet, kan også være sentrale når forskningsresultater skal vurderes.
+Reproduserbarhet er et viktig prinsipp innenfor vitenskaplig forskning, ettersom det gjør det mulig for andre forskere å bruke de samme dataene og analysemetodene for å undersøke om de oppnår det samme resultatet [@goodman2016b]. At forskningsresultatet kan reproduseres, betyr imidlertid ikke at resultatet nødvendigvis vil kunne bli gjenskapt med nye data eller andre forhold. Dette reiser spørsmål om hvorvidt reproduserbarhet alene er tilstrekkelig for å sikre pålitelige forskningsresultater. Andre faktorer som replikerbarhet, generaliserbarhet og validitet, kan også være sentrale når forskningsresultater skal vurderes.
 
 I denne artikkelen diskuteres det om reproduserbarhet er tilstrekkelig, eller om det bør stilles ytterligere krav til vitenskapelig forskning. Videre blir det også diskutert hvordan Quarto kan bidra til reproduserbare forskningsprosesser, i tillegg til hvilke utfordringer som fortsatt gjenstår.
 
 ## Litteraturgjennomgang
 
-For å vurdere om reproduserbarhet er tilstrekkelig alene, er det viktig å skille mellom reproduserbarhet, replikerbarhet og generaliserbarhet. Reproduserbarhet innebærer at et tidligere resultat skal kunne gjenskapes ved bruk av de samme dataene og analysemetodene[@goodman2016b]. Replikerbarhet innebærer at resultatet undersøkes ved hjelp av nye data, mens generaliserbarhet handler derimot på sin side om hvorvidt resultatene også gjelder i andre kontekster eller populasjoner[@bollen2015].
+For å vurdere om reproduserbarhet er tilstrekkelig alene, er det viktig å skille mellom reproduserbarhet, replikerbarhet og generaliserbarhet. *Reproduserbarhet* innebærer at et tidligere resultat skal kunne gjenskapes ved bruk av de samme dataene og analysemetodene [@goodman2016b]. *Replikerbarhet* innebærer at resultatet undersøkes ved hjelp av nye data, mens *generaliserbarhet* handler derimot på sin side om hvorvidt resultatene også gjelder i andre kontekster eller populasjoner  [@bollen2015].
 
-Reproduserbarhet er videre ikke nødvendig nok bare på grunnlag om at resultatet kan gjenskapes på bakgrunn med de samme dataene og metodene[@munafò2017]. Det sier derimot ingenting om resultatet holder når studien gjennomføres med enten nye data eller andre forhold[@klein2018b]. I tillegg er det viktig å vurdere om resultatene kan generaliseres til andre kontekster eller populasjoner, samt om studien faktisk måler det den har til hensikt å undersøke. Altså studiens validitet.
+Reproduserbarhet angir bare at resultatet kan gjenskapes med de samme dataene og metodene [@munafò2017]. Det sier derimot ingenting om resultatet holder når studien gjennomføres med enten nye data eller under andre forhold [@klein2018b]. I tillegg er det viktig å vurdere om resultatene kan generaliseres til andre kontekster eller populasjoner, samt om studien faktisk måler det den har til hensikt å undersøke. Altså studiens validitet.
 
-Betydningen av replikerbarhet har blitt særlig tydelig gjennom det som omtales som replikasjonskrisen. Flere forskningsresultater som tidligere ble sett på som gode og etablerte studier har vist seg å være vanskelige å gjenskape senere med nye data[@opensciencecollaboration2015]. På grunn av dette har det blitt skapt spørsmål om hvor robuste de enkelte publiserte forskningsresultatene faktisk er.
+Betydningen av replikerbarhet har blitt særlig tydelig gjennom det som omtales som replikasjonskrisen. Flere forskningsresultater som tidligere ble sett på som gode og etablerte funn har vist seg å være vanskelige å gjenskape senere med nye data [@opensciencecollaboration2015]. På grunn av dette har det blitt stilt spørsmål ved om hvor robuste de enkelte publiserte forskningsresultatene faktisk er.
 
-Open Science Collaboration forsøkte å replikere 100 publiserte psykologistudier. Her viste det seg at en betydelig lavere andel av replikasjonene ga statistisk signifikante resultater enn de opprinnelige studiene[@opensciencecollaboration2015]. Dette viser hvorfor et forskningsresultat ikke nødvendigvis kan bli sett på som robust bare fordi det først har gitt et signifikant resultat.
+@opensciencecollaboration2015 forsøkte å replikere 100 publiserte psykologistudier. Her viste det seg at en betydelig lavere andel av replikasjonene ga statistisk signifikante resultater enn de opprinnelige studiene . Dette viser hvorfor et forskningsresultat ikke nødvendigvis kan bli sett på som robust bare fordi det først har gitt et signifikant resultat.
 
-En mulig årsak til utfordringer med replikerbarhet er publiseringsskjevhet. Dersom studier med statistisk signifikante resultater har en større sannsynlighet for å bli publisert enn studier som ikke kommer med signifikante funn, kan forskningslitteraturen som er tilgjengelig bidra til et skjevt bilde av den faktiske effekten[@iyengar1988b].
+En mulig årsak til utfordringer med replikerbarhet er publiseringsskjevhet. Dersom studier med statistisk signifikante resultater har en større sannsynlighet for å bli publisert enn studier som ikke kommer med signifikante funn, kan forskningslitteraturen som er tilgjengelig bidra til et skjevt bilde av den faktiske effekten [@iyengar1988b].
 
-For å redusere slike problemer kan økt åpenhet rundt forskningsprosessen være et viktig tiltak for å styrke reproduserbarheten. Hvis forskere gjør både data, analysemetoder og kode tilgjengelig, vil det være enklere for andre å kontrollere hvordan resultatene er produsert, samt enklere å forsøke å gjenskape analysene[@nosek2015].
+For å redusere slike problemer kan økt åpenhet rundt forskningsprosessen være et viktig tiltak for å styrke reproduserbarheten. @nosek2015 påpeker at hvis forskere gjør både data, analysemetoder og kode tilgjengelig, vil det være enklere for andre å kontrollere hvordan resultatene er produsert, samt enklere å forsøke å gjenskape analysene.
 
-Det å gjøre forskningsmaterialet tilgjengelig er imidlertid ikke nødvendigvis tilstrekkelig nok dersom det er vanskelig å forstå hvordan analysen er gjennomført. En reproduserbar forskningsprosess bør derfor gjøre det mulig å følge stegene fra data og analyse helt til det ferdige resultatet[@allaire2020b]. Her kommer digitale verktøy som kombinerer tekst, kode og resultater til god nytte. Et eksempel er Quarto, som gjør det mulig å samle tekst, kode og analyseresultater i samme dokument[@lefoll2026].
+Det å gjøre forskningsmaterialet tilgjengelig er imidlertid ikke nødvendigvis tilstrekkelig nok dersom det er vanskelig å forstå hvordan analysen er gjennomført. Ifølge @allaire2020b bør en reproduserbar forskningsprosess derfor gjøre det mulig å følge stegene fra data og analyse helt til det ferdige resultatet. Her kommer digitale verktøy som kombinerer tekst, kode og resultater til god nytte. Et eksempel er Quarto, som gjør det mulig å samle tekst, kode og analyseresultater i samme dokument [@lefoll2026].
 
-Versjonskontroll er også noe som kan være viktig i en reproduserbar forskningsprosess. Ved å lagre endringer underveis muliggjør det å følge utviklingen i analysen, og se hvilke endringer som er gjort i data, kode og dokumentasjon[@ram2013].
+Versjonskontroll er også noe som kan være viktig i en reproduserbar forskningsprosess. Ved å lagre endringer underveis muliggjør det å følge utviklingen i analysen, og se hvilke endringer som er gjort i data, kode og dokumentasjon [@ram2013].
 
-## Diskusjon av forskningsspørsmålet (problemstillingen)
+## Reproduserbart, replikerbart eller generaliserbart?
 
-På bakgrunn av litteraturen ser man tydelig at reproduserbarhet har en viktig rolle i både robust og pålitelig forskning. På den ene siden er reproduserbarhet grunnleggende for at andre skal kunne kontrollere analysen, men samtidig kan det stilles spørsmål om det alene er tilstrekkelig for en pålitelig studie. En analyse kan være perfekt reproduserbar, men samtidig bygge på svake data, ha dårlig validitet eller ikke kunne replikeres ved nye data eller andre forhold[@munafò2017].
+På bakgrunn av litteraturen ser man tydelig at reproduserbarhet har en viktig rolle i både robust og pålitelig forskning. På den ene siden er reproduserbarhet grunnleggende for at andre skal kunne kontrollere analysen, men samtidig kan det stilles spørsmål om det alene er tilstrekkelig for en pålitelig studie. En analyse kan være perfekt reproduserbar, men samtidig bygge på svake data, ha dårlig validitet eller ikke kunne replikeres ved nye data eller andre forhold [@munafò2017].
 
-Samtidig er det verdt å spørre om reproduserbarhet og replikerbarhet bør vurderes som to atskilte krav, eller om de heller bør sees som utfyllende deler av samme kvalitetssikring. Reproduserbarhet sikrer at en analyse er etterprøvbar, mens replikerbarhet sier noe om hvor robust selve funnet er[@bollen2015]. Uten reproduserbarhet blir det vanskelig å vurdere replikerbarhet i det hele tatt, ettersom man da ikke vet nøyaktig hva den opprinnelige analysen faktisk innebar. I den forstand kan reproduserbarhet forstås som en nødvendig, men ikke tilstrekkelig forutsetning for pålitelig forskning[@antunes2024].
+Samtidig er det verdt å spørre om reproduserbarhet og replikerbarhet bør vurderes som to atskilte krav, eller om de heller bør sees som utfyllende deler av samme kvalitetssikring. Reproduserbarhet sikrer at en analyse er etterprøvbar, mens replikerbarhet sier noe om hvor robust selve funnet er [@bollen2015]. Uten reproduserbarhet blir det vanskelig å vurdere replikerbarhet i det hele tatt, ettersom man da ikke vet nøyaktig hva den opprinnelige analysen faktisk innebar. @antunes2024 fremhever at reproduserbarhet best kan forstås som en nødvendig, men ikke tilstrekkelig forutsetning for pålitelig forskning .
 
-Innenfor data science blir dette spørsmålet ekstra aktuelt fordi analysene ofte er komplekse, involverer store datamengder og mange bearbeidingssteg før resultatet foreligger. Små valg underveis som for eksempel hvordan manglende verdier håndteres, kan ha stor innvirkning på resultatet. Dette gjør det viktig at hele arbeidsflyten er dokumentert og tilgjengelig, ikke bare selve konklusjonen[@sandve2013].
+Innenfor data science blir dette spørsmålet ekstra aktuelt fordi analysene ofte er komplekse, involverer store datamengder og mange bearbeidingssteg før resultatet foreligger. Små valg underveis som for eksempel hvordan manglende verdier håndteres, kan ha stor innvirkning på resultatet. Dette gjør det viktig at hele arbeidsflyten er dokumentert og tilgjengelig, ikke bare selve konklusjonen [@sandve2013].
 
-Her vil verktøy som Quarto spille en sentral rolle. Ved å kombinere tekst, kode og resultater i ett og samme dokument, reduseres risikoen for at det oppstår avvik mellom det som faktisk ble kjørt og det som rapporteres i teksten[@lefoll2026]. Dette bidrar til større grad av transparens, men løser likevel ikke alle utfordringer knyttet til reproduserbarhet. Programversjoner, avhengigheter og beregningsmiljø er faktorer som kan endre seg over tid, slik at en analyse som tidligere fungerte ikke nødvendigvis vil kunne gjentas senere[@taschuk2017]. Dette viser at reproduserbarhet ikke bare handler om å dele kode og data, men også om å sikre at det tekniske miljøet analysen ble utført i, kan gjenskapes[@sandve2013].
+Her vil verktøy som Quarto spille en sentral rolle. Ved å kombinere tekst, kode og resultater i ett og samme dokument, reduseres risikoen for at det oppstår avvik mellom det som faktisk ble kjørt og det som rapporteres i teksten [@lefoll2026]. Dette bidrar til større grad av transparens, men løser likevel ikke alle utfordringer knyttet til reproduserbarhet. Programversjoner, avhengigheter og beregningsmiljø er faktorer som kan endre seg over tid, slik at en analyse som tidligere fungerte ikke nødvendigvis vil kunne gjentas senere [@taschuk2017]. Dette viser at reproduserbarhet ikke bare handler om å dele kode og data, men også om å sikre at det tekniske miljøet analysen ble utført i, kan gjenskapes [@sandve2013].
 
-Videre er det ikke gitt at åpenhet rundt data og kode automatisk fører til at andre faktisk etterpøver analysen. Reproduserbarhet legger til rette for kontroll, men forutsetter samtidig at noen tar seg tid til å gjennomføre denne kontrollen. Dette peker på et bredere problem knyttet til insentivstrukturer i forskning, der publisering av nye resultater ofte verdsettes høyere enn etterprøving av eksisterende funn[@munafò2017].
+Videre er det ikke gitt at åpenhet rundt data og kode automatisk fører til at andre faktisk etterpøver analysen. Reproduserbarhet legger til rette for kontroll, men forutsetter samtidig at noen tar seg tid til å gjennomføre denne kontrollen. Dette peker på et bredere problem knyttet til insentivstrukturer i forskning, der publisering av nye resultater ofte verdsettes høyere enn etterprøving av eksisterende funn [@munafò2017].
 
-Litteraturen tyder altså at reproduserbarhet er en nødvendig, men ikke alene tilstrekkelig forutsetning for å drive pålitelig forskning. Skal forskningsresultatet kunne stoles på, må reproduserbarhet suppleres med vurderinger av replikerbarhet, validitet og generaliserbarhet, samt en forskningskultur som faktisk legger til rette for og verdsetter etterprøving.
+Litteraturen tyder altså på at reproduserbarhet er en nødvendig, men ikke alene tilstrekkelig forutsetning for å drive pålitelig forskning. Skal forskningsresultatet kunne stoles på, må reproduserbarhet suppleres med vurderinger av replikerbarhet, validitet og generaliserbarhet, samt en forskningskultur som faktisk legger til rette for og verdsetter etterprøving.
 
 ## Konklusjon
 
@@ -77,7 +79,7 @@ Det ble ikke benyttet eksterne R-pakker i dokumentet.
 
 ## Appendiks B
 
-- Hvordan er KI brukt:\
+- Hvordan er KI brukt:
   ChatGPT (GPT-5.6 Sol, OpenAI) ble brukt som et veiledningsverktøy under arbeidet med oppgaven. Tjenesten ble blant annet brukt til veiledning i bruk Quarto, diskusjon av oppgavens struktur og problemstilling, hjelp til å forstå fagbegreper, forslag til relevante kilder og språklige tilbakemeldinger på tekstutkast. Jeg har selv skrevet og bearbeidet den endelige teksten, vurdert hvilke kilder som skulle benyttes og gjort de endelige faglige valgene.
-- Vedlagt finner du linken til samtaleloggen med ChatGPT\
-  <https://chatgpt.com/share/6aaa982a-ae88-83ed-aece-8adf1054012f>
+- Vedlagt finner du linken til samtaleloggen med ChatGPT
+  [chatGPT](https://chatgpt.com/share/6aaa982a-ae88-83ed-aece-8adf1054012f)

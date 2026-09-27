@@ -1,0 +1,32 @@
+---
+title: "Kommentarer"
+lang: nb
+format: html
+editor: source
+bibliography: ag.bib
+---
+
+- endret til `bibliography: `[reproducibility.bib, ag.bib]` i YAML header slik at jeg kan legge til referanser i ag.bib.
+- Ved «end-of-sentence» sitering skal det værre mellomrom mellom siste ord og siteringen.
+- I første avsnitt i Litteraturgjennomgang vil jeg foreslå å sette de tre begrepene i kursiv der de blir definert. Dette siden de tre er så sentrale for hele temaet.
+- Skiftet fra `[@opensciencecollaboration2015]` til in-text `@opensciencecollaboration2015` sitering i starten av 4. avsnitt i Litteraturgjennomgang.
+-  Jeg foreslår å endre referansen til `@nosek2015` i 6. avsnitt til «in-text» for å få litt mer variasjon.
+- Ditto for `@allaire2020b` i 7. avsnitt.
+- Jeg vil foreslå å endre overskriften fra «Diskusjon av forskningsspørsmålet (problemstillingen)» til noe mer direkte som f.eks «Reproduserbart, replikerbart eller generaliserbart?»
+- Et poeng du kunne hatt med er at en del data ikke kan deles pga. personvernhensyn etc.
+
+## Generelle kommentarer
+
+- Det ha blitt et fint og ryddig lite paper. 
+- Fine «commit messages». Fortsett slik.
+- Brukt grener og commits på en fin måte.
+- Takk for tilgang til chat-en med chatGPT. Gir meg mer innsikt i hvordan dere bruker verktøyet.
+- Liker godt din innledene forspørsel til chat-en der du gjør det kalrt at du vil være i førersete.
+- Ser fra innledene spørsmål at du skriver godt akademisk språk også uten hjelp av KI. Tar du til deg tipsene og rådene fra KI kommer du til å bli en racer på å skrive slike tekster også uten hjelp av KI 8-)
+- Godkjent
+
+
+
+
+
+
